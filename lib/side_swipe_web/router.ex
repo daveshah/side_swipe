@@ -18,6 +18,13 @@ defmodule SideSwipeWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/transformations", TransformationLive.Index, :index
+    live "/transformations/new", TransformationLive.Index, :new
+    live "/transformations/:id/edit", TransformationLive.Index, :edit
+
+    live "/transformations/:id", TransformationLive.Show, :show
+    live "/transformations/:id/show/edit", TransformationLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

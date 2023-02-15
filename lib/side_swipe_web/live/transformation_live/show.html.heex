@@ -1,0 +1,30 @@
+<.header>
+  Transformation <%= @transformation.id %>
+  <:subtitle>This is a transformation record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/transformations/#{@transformation}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit transformation</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Hook"><%= @transformation.hook %></:item>
+  <:item title="Identifier"><%= @transformation.identifier %></:item>
+  <:item title="Description"><%= @transformation.description %></:item>
+  <:item title="Template"><%= @transformation.template %></:item>
+  <:item title="Published at"><%= @transformation.published_at %></:item>
+</.list>
+
+<.back navigate={~p"/transformations"}>Back to transformations</.back>
+
+<.modal :if={@live_action == :edit} id="transformation-modal" show on_cancel={JS.patch(~p"/transformations/#{@transformation}")}>
+  <.live_component
+    module={SideSwipeWeb.TransformationLive.FormComponent}
+    id={@transformation.id}
+    title={@page_title}
+    action={@live_action}
+    transformation={@transformation}
+    patch={~p"/transformations/#{@transformation}"}
+  />
+</.modal>
