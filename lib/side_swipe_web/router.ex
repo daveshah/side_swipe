@@ -14,10 +14,8 @@ defmodule SideSwipeWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", SideSwipeWeb do
+  scope "/admin", SideSwipeWeb do
     pipe_through :browser
-
-    get "/", PageController, :home
 
     live "/transformations", TransformationLive.Index, :index
     live "/transformations/new", TransformationLive.Index, :new

@@ -17,19 +17,19 @@ defmodule SideSwipeWeb.TransformationLiveTest do
     setup [:create_transformation]
 
     test "lists all transformations", %{conn: conn, transformation: transformation} do
-      {:ok, _index_live, html} = live(conn, ~p"/transformations")
+      {:ok, _index_live, html} = live(conn, ~p"/admin/transformations")
 
       assert html =~ "Listing Transformations"
       assert html =~ transformation.description
     end
 
     test "saves new transformation", %{conn: conn} do
-      {:ok, index_live, _html} = live(conn, ~p"/transformations")
+      {:ok, index_live, _html} = live(conn, ~p"/admin/transformations")
 
       assert index_live |> element("a", "New Transformation") |> render_click() =~
                "New Transformation"
 
-      assert_patch(index_live, ~p"/transformations/new")
+      assert_patch(index_live, ~p"/admin/transformations/new")
 
       assert index_live
              |> form("#transformation-form", transformation: @invalid_attrs)
@@ -39,7 +39,7 @@ defmodule SideSwipeWeb.TransformationLiveTest do
              |> form("#transformation-form", transformation: @create_attrs)
              |> render_submit()
 
-      assert_patch(index_live, ~p"/transformations")
+      assert_patch(index_live, ~p"/admin/transformations")
 
       html = render(index_live)
       assert html =~ "Transformation created successfully"
@@ -47,12 +47,12 @@ defmodule SideSwipeWeb.TransformationLiveTest do
     end
 
     test "updates transformation in listing", %{conn: conn, transformation: transformation} do
-      {:ok, index_live, _html} = live(conn, ~p"/transformations")
+      {:ok, index_live, _html} = live(conn, ~p"/admin/transformations")
 
       assert index_live |> element("#transformations-#{transformation.id} a", "Edit") |> render_click() =~
                "Edit Transformation"
 
-      assert_patch(index_live, ~p"/transformations/#{transformation}/edit")
+      assert_patch(index_live, ~p"/admin/transformations/#{transformation}/edit")
 
       assert index_live
              |> form("#transformation-form", transformation: @invalid_attrs)
@@ -62,7 +62,7 @@ defmodule SideSwipeWeb.TransformationLiveTest do
              |> form("#transformation-form", transformation: @update_attrs)
              |> render_submit()
 
-      assert_patch(index_live, ~p"/transformations")
+      assert_patch(index_live, ~p"/admin/transformations")
 
       html = render(index_live)
       assert html =~ "Transformation updated successfully"
@@ -70,7 +70,7 @@ defmodule SideSwipeWeb.TransformationLiveTest do
     end
 
     test "deletes transformation in listing", %{conn: conn, transformation: transformation} do
-      {:ok, index_live, _html} = live(conn, ~p"/transformations")
+      {:ok, index_live, _html} = live(conn, ~p"/admin/transformations")
 
       assert index_live |> element("#transformations-#{transformation.id} a", "Delete") |> render_click()
       refute has_element?(index_live, "#transformations-#{transformation.id}")
@@ -81,19 +81,19 @@ defmodule SideSwipeWeb.TransformationLiveTest do
     setup [:create_transformation]
 
     test "displays transformation", %{conn: conn, transformation: transformation} do
-      {:ok, _show_live, html} = live(conn, ~p"/transformations/#{transformation}")
+      {:ok, _show_live, html} = live(conn, ~p"/admin/transformations/#{transformation}")
 
       assert html =~ "Show Transformation"
       assert html =~ transformation.description
     end
 
     test "updates transformation within modal", %{conn: conn, transformation: transformation} do
-      {:ok, show_live, _html} = live(conn, ~p"/transformations/#{transformation}")
+      {:ok, show_live, _html} = live(conn, ~p"/admin/transformations/#{transformation}")
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Transformation"
 
-      assert_patch(show_live, ~p"/transformations/#{transformation}/show/edit")
+      assert_patch(show_live, ~p"/admin/transformations/#{transformation}/show/edit")
 
       assert show_live
              |> form("#transformation-form", transformation: @invalid_attrs)
@@ -103,7 +103,7 @@ defmodule SideSwipeWeb.TransformationLiveTest do
              |> form("#transformation-form", transformation: @update_attrs)
              |> render_submit()
 
-      assert_patch(show_live, ~p"/transformations/#{transformation}")
+      assert_patch(show_live, ~p"/admin/transformations/#{transformation}")
 
       html = render(show_live)
       assert html =~ "Transformation updated successfully"

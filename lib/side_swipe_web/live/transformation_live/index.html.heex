@@ -1,7 +1,7 @@
 <.header>
   Listing Transformations
   <:actions>
-    <.link patch={~p"/transformations/new"}>
+    <.link patch={~p"/admin/transformations/new"}>
       <.button>New Transformation</.button>
     </.link>
   </:actions>
@@ -10,7 +10,7 @@
 <.table
   id="transformations"
   rows={@streams.transformations}
-  row_click={fn {_id, transformation} -> JS.navigate(~p"/transformations/#{transformation}") end}
+  row_click={fn {_id, transformation} -> JS.navigate(~p"/admin/transformations/#{transformation}") end}
 >
   <:col :let={{_id, transformation}} label="Hook"><%= transformation.hook %></:col>
   <:col :let={{_id, transformation}} label="Identifier"><%= transformation.identifier %></:col>
@@ -19,9 +19,9 @@
   <:col :let={{_id, transformation}} label="Published at"><%= transformation.published_at %></:col>
   <:action :let={{_id, transformation}}>
     <div class="sr-only">
-      <.link navigate={~p"/transformations/#{transformation}"}>Show</.link>
+      <.link navigate={~p"/admin/transformations/#{transformation}"}>Show</.link>
     </div>
-    <.link patch={~p"/transformations/#{transformation}/edit"}>Edit</.link>
+    <.link patch={~p"/admin/transformations/#{transformation}/edit"}>Edit</.link>
   </:action>
   <:action :let={{id, transformation}}>
     <.link
@@ -37,7 +37,7 @@
   :if={@live_action in [:new, :edit]}
   id="transformation-modal"
   show
-  on_cancel={JS.navigate(~p"/transformations")}
+  on_cancel={JS.navigate(~p"/admin/transformations")}
 >
   <.live_component
     module={SideSwipeWeb.TransformationLive.FormComponent}
@@ -45,6 +45,6 @@
     title={@page_title}
     action={@live_action}
     transformation={@transformation}
-    patch={~p"/transformations"}
+    patch={~p"/admin/transformations"}
   />
 </.modal>
