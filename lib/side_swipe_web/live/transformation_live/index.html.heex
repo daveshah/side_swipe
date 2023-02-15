@@ -10,13 +10,17 @@
 <.table
   id="transformations"
   rows={@streams.transformations}
-  row_click={fn {_id, transformation} -> JS.navigate(~p"/admin/transformations/#{transformation}") end}
+  row_click={
+    fn {_id, transformation} -> JS.navigate(~p"/admin/transformations/#{transformation}") end
+  }
 >
   <:col :let={{_id, transformation}} label="Hook"><%= transformation.hook %></:col>
   <:col :let={{_id, transformation}} label="Identifier"><%= transformation.identifier %></:col>
   <:col :let={{_id, transformation}} label="Description"><%= transformation.description %></:col>
   <:col :let={{_id, transformation}} label="Template"><%= transformation.template %></:col>
-  <:col :let={{_id, transformation}} label="Published at"><%= transformation.published_at %></:col>
+  <:col :let={{_id, transformation}} label="Published at">
+    <%= transformation.published_at %>
+  </:col>
   <:action :let={{_id, transformation}}>
     <div class="sr-only">
       <.link navigate={~p"/admin/transformations/#{transformation}"}>Show</.link>

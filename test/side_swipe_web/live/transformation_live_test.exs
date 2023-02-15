@@ -4,8 +4,20 @@ defmodule SideSwipeWeb.TransformationLiveTest do
   import Phoenix.LiveViewTest
   import SideSwipe.TransformationsFixtures
 
-  @create_attrs %{description: "some description", hook: "some hook", identifier: "some identifier", published_at: "2023-02-14T21:38:00Z", template: "some template"}
-  @update_attrs %{description: "some updated description", hook: "some updated hook", identifier: "some updated identifier", published_at: "2023-02-15T21:38:00Z", template: "some updated template"}
+  @create_attrs %{
+    description: "some description",
+    hook: "some hook",
+    identifier: "some identifier",
+    published_at: "2023-02-14T21:38:00Z",
+    template: "some template"
+  }
+  @update_attrs %{
+    description: "some updated description",
+    hook: "some updated hook",
+    identifier: "some updated identifier",
+    published_at: "2023-02-15T21:38:00Z",
+    template: "some updated template"
+  }
   @invalid_attrs %{description: nil, hook: nil, identifier: nil, published_at: nil, template: nil}
 
   defp create_transformation(_) do
@@ -49,7 +61,9 @@ defmodule SideSwipeWeb.TransformationLiveTest do
     test "updates transformation in listing", %{conn: conn, transformation: transformation} do
       {:ok, index_live, _html} = live(conn, ~p"/admin/transformations")
 
-      assert index_live |> element("#transformations-#{transformation.id} a", "Edit") |> render_click() =~
+      assert index_live
+             |> element("#transformations-#{transformation.id} a", "Edit")
+             |> render_click() =~
                "Edit Transformation"
 
       assert_patch(index_live, ~p"/admin/transformations/#{transformation}/edit")
@@ -72,7 +86,10 @@ defmodule SideSwipeWeb.TransformationLiveTest do
     test "deletes transformation in listing", %{conn: conn, transformation: transformation} do
       {:ok, index_live, _html} = live(conn, ~p"/admin/transformations")
 
-      assert index_live |> element("#transformations-#{transformation.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#transformations-#{transformation.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#transformations-#{transformation.id}")
     end
   end

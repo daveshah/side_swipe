@@ -33,7 +33,10 @@ defmodule SideSwipeWeb.TransformationLive.Index do
   end
 
   @impl true
-  def handle_info({SideSwipeWeb.TransformationLive.FormComponent, {:saved, transformation}}, socket) do
+  def handle_info(
+        {SideSwipeWeb.TransformationLive.FormComponent, {:saved, transformation}},
+        socket
+      ) do
     {:noreply, stream_insert(socket, :transformations, transformation)}
   end
 

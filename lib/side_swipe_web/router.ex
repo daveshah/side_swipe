@@ -25,6 +25,12 @@ defmodule SideSwipeWeb.Router do
     live "/transformations/:id/show/edit", TransformationLive.Show, :edit
   end
 
+  scope "/api", SideSwipeWeb do
+    pipe_through :api
+
+    resources "/transformations", TransformationController, only: [:create]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", SideSwipeWeb do
   #   pipe_through :api

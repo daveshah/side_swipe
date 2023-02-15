@@ -57,7 +57,10 @@ defmodule SideSwipeWeb.TransformationLive.FormComponent do
   end
 
   defp save_transformation(socket, :edit, transformation_params) do
-    case Transformations.update_transformation(socket.assigns.transformation, transformation_params) do
+    case Transformations.update_transformation(
+           socket.assigns.transformation,
+           transformation_params
+         ) do
       {:ok, transformation} ->
         notify_parent({:saved, transformation})
 

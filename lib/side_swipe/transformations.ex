@@ -8,6 +8,10 @@ defmodule SideSwipe.Transformations do
 
   alias SideSwipe.Transformations.Transformation
 
+  def apply(_) do
+    {:ok, %{}}
+  end
+
   @doc """
   Returns the list of transformations.
 

@@ -2,7 +2,10 @@
   Transformation <%= @transformation.id %>
   <:subtitle>This is a transformation record from your database.</:subtitle>
   <:actions>
-    <.link patch={~p"/admin/transformations/#{@transformation}/show/edit"} phx-click={JS.push_focus()}>
+    <.link
+      patch={~p"/admin/transformations/#{@transformation}/show/edit"}
+      phx-click={JS.push_focus()}
+    >
       <.button>Edit transformation</.button>
     </.link>
   </:actions>
@@ -18,7 +21,12 @@
 
 <.back navigate={~p"/admin/transformations"}>Back to transformations</.back>
 
-<.modal :if={@live_action == :edit} id="transformation-modal" show on_cancel={JS.patch(~p"/admin/transformations/#{@transformation}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="transformation-modal"
+  show
+  on_cancel={JS.patch(~p"/admin/transformations/#{@transformation}")}
+>
   <.live_component
     module={SideSwipeWeb.TransformationLive.FormComponent}
     id={@transformation.id}
