@@ -21,8 +21,8 @@ defmodule SideSwipeWeb.TransformationLive.FormComponent do
       >
         <.input field={@form[:hook]} type="text" label="Hook" />
         <.input field={@form[:identifier]} type="text" label="Identifier" />
-        <.input field={@form[:description]} type="text" label="Description" />
-        <.input field={@form[:template]} type="text" label="Template" />
+        <.input field={@form[:description]} type="textarea" label="Description" />
+        <.input field={@form[:template]} type="textarea" label="Template" />
         <.input field={@form[:published_at]} type="datetime-local" label="Published at" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Transformation</.button>

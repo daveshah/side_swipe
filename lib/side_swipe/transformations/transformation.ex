@@ -16,6 +16,6 @@ defmodule SideSwipe.Transformations.Transformation do
   def changeset(transformation, attrs) do
     transformation
     |> cast(attrs, [:hook, :identifier, :description, :template, :published_at])
-    |> validate_required([:hook, :identifier, :description, :template, :published_at])
+    |> validate_required([:hook, :identifier, :template])
   end
 end
