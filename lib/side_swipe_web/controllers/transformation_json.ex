@@ -1,6 +1,4 @@
 defmodule SideSwipeWeb.TransformationJSON do
-  alias SideSwipe.Transformations.Transformation
-
   @doc """
   Renders a single transformation.
   """
