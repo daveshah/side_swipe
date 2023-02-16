@@ -3,6 +3,32 @@ defmodule SideSwipe.TransformationsTest do
 
   alias SideSwipe.Transformations
 
+  describe "apply/1" do
+    test "data transformation" do
+      %{
+        "hook" => "test-hook",
+        "identifier" => "test-identifier",
+        "template" => """
+        {
+          "test_sku": "{{order.sku}}"
+        }
+        """,
+        "published_at" => DateTime.utc_now()
+      }
+      |> Transformations.create_transformation()
+
+      params = %{
+        "hook" => "test-hook",
+        "identifier" => "test-identifier",
+        "data" => %{"order" => %{"sku" => "ABC-123"}}
+      }
+
+      res = Transformations.apply(params)
+
+      assert {:ok, %{"test_sku" => "ABC-123"}} = res
+    end
+  end
+
   describe "transformations" do
     alias SideSwipe.Transformations.Transformation
 

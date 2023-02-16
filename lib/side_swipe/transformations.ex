@@ -8,8 +8,12 @@ defmodule SideSwipe.Transformations do
 
   alias SideSwipe.Transformations.Transformation
 
-  def apply(_) do
-    {:ok, %{}}
+  def apply(%{"hook" => hook, "identifier" => identifier, "data" => data}) do
+    transformation = Repo.get_by(Transformation, hook: hook, identifier: identifier)
+    {:ok, template} = Solid.parse(transformation.template)
+    Solid.render!(template, data)
+    |> to_string()
+    |> Jason.decode()
   end
 
   @doc """

@@ -1,0 +1,13 @@
+POST http://localhost:4000/api/transformations
+Content-Type: application/json
+
+{
+  "hook": "foobar",
+  "identifier": "foobar",
+  "data": {
+    "vas": {
+      "new_value": "Vas's Value",
+      "some_other_value": "Dave's Key"
+    }
+  }
+}
